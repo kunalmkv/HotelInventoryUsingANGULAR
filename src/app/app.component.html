@@ -1,7 +1,21 @@
 <h1>hello world</h1>
-<app-rooms></app-rooms>
+<!-- <app-rooms></app-rooms> -->
 
-<div [ngSwitch]="role">
+<app-container>
+  <app-rooms>
+
+  </app-rooms>
+  <app-employee>
+
+  </app-employee>
+  <h1>This is from ng content</h1>
+
+</app-container>
+
+<div #name>
+
+</div>
+<!-- <div [ngSwitch]="role">
   <div *ngSwitchCase="'User'">
     Welcome User!
   </div>
@@ -13,4 +27,4 @@
     You are Not Authorised to view this page
   </div>
 
-</div>
+</div> -->

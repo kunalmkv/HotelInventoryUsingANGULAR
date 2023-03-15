@@ -1,4 +1,5 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, OnInit, ViewChild } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
 import { Room, RoomList } from './rooms'
 
 @Component({
@@ -7,8 +8,8 @@ import { Room, RoomList } from './rooms'
   styleUrls: ['./rooms.component.scss']
 })
 
-export class RoomsComponent implements OnInit, DoCheck {
-  title = 'Room List';
+export class RoomsComponent implements OnInit, DoCheck, AfterViewInit {
+
   hotelName = "PICADiLLY";
   numberOfRooms = 10;
   hideRooms = false;
@@ -19,24 +20,20 @@ export class RoomsComponent implements OnInit, DoCheck {
     availableRooms: 10,
     bookedRooms: 5
   }
-
-  ngDoCheck() {
-    console.log('on changes is called');
-  }
-
+  title = 'Room List';
   roomList: RoomList[] = []
-  toggle() {
-    this.hideRooms = !this.hideRooms;
-    this.title = "Rooms List"
+
+  @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
+
+  constructor() {
   }
 
   selectRoom(room: RoomList) {
     this.selectedRoom = room;
   }
 
-  constructor() {
-  }
   ngOnInit(): void {
+    //console.log(this.headerComponent)
     this.roomList = [{
       roomNumber: 1,
       roomType: 'Delux Room',
@@ -82,5 +79,19 @@ export class RoomsComponent implements OnInit, DoCheck {
     //this.roomList.push(room);
     this.roomList = [...this.roomList, room];
   }
+  ngDoCheck() {
+    console.log('on changes is called');
+  }
+  ngAfterViewInit() {
+    //console.log(this.headerComponent);
+
+    this.headerComponent.title = "Rooms View"
+  }
+  toggle() {
+    this.hideRooms = !this.hideRooms;
+    this.title = "Rooms List"
+  }
+
+
 }
 
